@@ -9,10 +9,20 @@ router.get('/',(req,res)=>{
     //Parse/Read dinosaurs.json file
     let dinosaurs = fs.readFileSync('./dinosaurs.json')
     //Convert dinosaurs.json file to an array
-    let dinoData = JSON.parse(dinosaurs);
+    let dinoData = JSON.parse(dinosaurs)
+
+    // BELOW SHOULD BE CREATING A SEARCH BAR
+    let nameFilter = req.query.nameFilter
+    // if user searches something
+    if(nameFilter){
+        dinoData = dinoData.filter(dino=>{
+            return dino.name.toLowerCase()===nameFilter.toLocaleLowerCase()
+        })
+    }
+
     // console.log(dinoData)
     res.render('dinosaurs/index', {myDinos: dinoData})
-
+    
 })
 
 router.get('/new', (req,res)=>{
