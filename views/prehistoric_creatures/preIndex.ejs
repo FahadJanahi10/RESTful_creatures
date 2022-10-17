@@ -1,0 +1,16 @@
+<style>
+    form{
+        margin: 3px;
+    }
+</style>
+<ul>
+    <% myDinos.forEach((dino, id) => { %>
+        <a href="/prehistoric_creatures/<%= id %>">  
+            <li><%= dino.type %></li>
+            <a id="edit" href="/prehistoric_creatures/edit/<%= id %>">Edit</a>
+            <form method="POST" action="/prehistoric_creatures/<%= id %>/?_method=DELETE">
+                <input type="submit" value="Delete">
+            </form>
+        </a>
+    <% }); %>
+</ul>
